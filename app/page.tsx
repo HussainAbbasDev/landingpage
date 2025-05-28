@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useCallback, useState } from "react";
+import Image from "next/image";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -20,7 +21,7 @@ export default function Home() {
   const testimonialCards = [
     {
       type: 'quote',
-      text: '"GSsoft helped us launch our product with a beautiful landing page that brought in more leads than ever!"',
+      text: '"GAsoft helped us launch our product with a beautiful landing page that brought in more leads than ever!"',
       user: 'Hussain Abbas',
     },
     {
@@ -29,7 +30,7 @@ export default function Home() {
     },
     {
       type: 'quote',
-      text: '"The GSsoft team made the process seamless and stress-free. Our landing page looks amazing and loads super fast!"',
+      text: '"The GAsoft team made the process seamless and stress-free. Our landing page looks amazing and loads super fast!"',
       user: 'Mohammad Abbas',
     },
     {
@@ -46,7 +47,7 @@ export default function Home() {
     },
     {
       q: 'Is my data secure?',
-      a: 'Yes, GSsoft uses best practices to keep your data safe and private on all landing pages.'
+      a: 'Yes, GAsoft uses best practices to keep your data safe and private on all landing pages.'
     },
     {
       q: 'How fast can I get my page?',
@@ -116,8 +117,8 @@ export default function Home() {
           
           <div className="flex items-center gap-2">
             {/* Placeholder Logo */}
-            <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full flex items-center justify-center font-bold text-xl">GS</div>
-            <span className="font-bold text-lg tracking-wide">GSsoft</span>
+            <Image src="/logo.png" alt="GAsoft Logo" width={40} height={40} className="rounded-full" />
+            <span className="font-bold text-lg tracking-wide">GAsoft</span>
           </div>
           <nav className="hidden md:flex gap-8 text-sm font-medium">
             <a href="#about" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'about')}>About</a>
@@ -202,8 +203,8 @@ export default function Home() {
           {/* Left: Text and Features */}
           <div className="flex-[1.3] min-w-[400px]">
             <span className="inline-block mb-4 px-4 py-1 rounded-full bg-[#23233a] text-white text-sm font-semibold">About Us</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-white leading-tight">About GSsoft Landing Page Solutions</h2>
-            <p className="text-base text-gray-300 mb-8 max-w-xl">At GSsoft, we are dedicated to helping small businesses grow online with beautiful, high-converting landing pages. Our team combines design expertise and technical know-how to deliver fast, secure, and affordable web solutions.</p>
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-white leading-tight">About GAsoft Landing Page Solutions</h2>
+            <p className="text-base text-gray-300 mb-8 max-w-xl">At GAsoft, we are dedicated to helping small businesses grow online with beautiful, high-converting landing pages. Our team combines design expertise and technical know-how to deliver fast, secure, and affordable web solutions.</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 mt-6">
               {[
                 'Scalability & Flexibility',
@@ -387,7 +388,7 @@ export default function Home() {
           {/* Right: Heading and FAQ Grid */}
           <div className="flex-[1.3] min-w-[400px]">
             <span className="inline-block mb-4 px-4 py-1 rounded-full bg-[#23233a] text-white text-sm font-semibold">FAQ</span>
-            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-white leading-tight">Your Queries About <span className="block text-gray-400">GSsoft Landing Pages</span></h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-white leading-tight">Your Queries About <span className="block text-gray-400">GAsoft Landing Pages</span></h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
               {faqData.map((item, i) => (
                 <div key={item.q} className="bg-[#181828] rounded-xl shadow-lg text-white text-lg font-medium hover:bg-[#23233a] transition cursor-pointer overflow-hidden">
@@ -438,7 +439,7 @@ export default function Home() {
         <div className="relative z-10 max-w-3xl w-full mx-auto bg-[#181828] rounded-3xl px-8 py-14 flex flex-col items-center text-center shadow-2xl border border-[#23233a]">
           <span className="inline-block mb-4 px-4 py-1 rounded-full bg-[#23233a] text-white text-sm font-semibold">Fast, Modern, Affordable</span>
           <h2 className="text-3xl md:text-5xl font-extrabold mb-2 text-white leading-tight">Take the Next Step Towards<br />Your Online Success!</h2>
-          <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-400">Launch Your GSsoft Landing Page Today</h3>
+          <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-400">Launch Your GAsoft Landing Page Today</h3>
           <p className="text-base text-gray-300 mb-8 max-w-xl">Unlock growth and efficiency with a beautiful, high-converting landing page for your business. Let us handle the tech, you focus on your goals.</p>
           <form className="bg-[#181828] rounded-xl p-8 shadow-lg flex flex-col gap-4" onSubmit={handleFormSubmit}>
             <div className="flex flex-col md:flex-row gap-4">
@@ -581,9 +582,9 @@ export default function Home() {
       <footer className="w-full py-10 bg-[#0a0a0a] border-t border-[#23233a] text-center text-gray-400">
         <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 px-4">
           <div className="flex flex-col items-center md:items-start">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-600 to-indigo-600 rounded-full flex items-center justify-center font-bold text-lg">GS</div>
-              <span className="font-bold text-base tracking-wide text-white">GSsoft</span>
+            <div className="flex items-center gap-2 mb-2 text-white">
+              <Image src="/logo.png" alt="GAsoft Logo" width={32} height={32} className="rounded-full" />
+              <span className="font-bold text-base tracking-wide">GAsoft</span>
             </div>
             <span className="text-xs">Innovate Faster, Scale Smarter.</span>
           </div>
@@ -593,7 +594,7 @@ export default function Home() {
             <a href="#pricing" className="hover:text-purple-400 transition">Pricing</a>
             <a href="#contact" className="hover:text-purple-400 transition">Contact</a>
           </div>
-          <div className="text-xs">&copy; {new Date().getFullYear()} GSsoft. All rights reserved.</div>
+          <div className="text-xs">&copy; {new Date().getFullYear()} GAsoft. All rights reserved.</div>
         </div>
       </footer>
     </div>
