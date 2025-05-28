@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import Image from "next/image";
 
 const fadeInUp = {
@@ -9,6 +9,22 @@ const fadeInUp = {
 };
 
 export default function Home() {
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth >= 768); // Tailwind's 'md' breakpoint
+    };
+
+    // Set initial value
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Smooth scroll handler for nav links
   const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
@@ -16,6 +32,7 @@ export default function Home() {
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
     }
+    setIsMobileMenuOpen(false); // Close mobile menu on link click
   }, []);
 
   const testimonialCards = [
@@ -101,16 +118,18 @@ export default function Home() {
     }
   };
 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <div className="bg-[#0a0a0a] text-[#ededed] font-sans min-h-screen w-full overflow-x-hidden">
       {/* Hero Section */}
       <motion.section
         id="hero"
-        initial="hidden"
-        whileInView="show"
+        className="relative flex flex-col items-center justify-center min-h-[60vh] px-4 text-center bg-gradient-to-b from-[#1a1a2e] to-[#0a0a0a]"
+        initial={isLargeScreen ? "hidden" : undefined}
+        whileInView={isLargeScreen ? "show" : undefined}
         viewport={{ once: true, amount: 0.99}}
         variants={fadeInUp}
-        className="relative flex flex-col items-center justify-center min-h-[60vh] px-4 text-center bg-gradient-to-b from-[#1a1a2e] to-[#0a0a0a]"
       >
         
                 <header className="w-full flex justify-between items-center max-w-6xl mx-auto mb-20 pt-3 mt-0 bg-white/30 rounded-xl backdrop-blur-md px-6 py-3">
@@ -127,12 +146,42 @@ export default function Home() {
             <a href="#pricing" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'pricing')}>Pricing</a>
             <a href="#contact" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'contact')}>Contact</a>
           </nav>
-          <a href="#contact" className="bg-purple-600 hover:bg-purple-700 transition text-white px-6 py-2 rounded-full font-semibold shadow-lg">Get Started</a>
+          <a href="#contact" className="hidden md:flex bg-purple-600 hover:bg-purple-700 transition text-white px-6 py-2 rounded-full font-semibold shadow-lg" onClick={e => handleNavClick(e, 'contact')}>Get Started</a>
         </header>
+        
+        {/* Mobile Menu Button */}
+        <button 
+          className="md:hidden fixed top-4 right-6 z-50 p-2 rounded-md bg-white/30 backdrop-blur-md" 
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+          aria-label="Toggle Mobile Menu"
+        >
+          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}></path>
+          </svg>
+        </button>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <motion.nav
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-[#0a0a0a] z-50 flex flex-col items-center justify-center gap-6 text-xl font-medium md:hidden"
+          >
+            <a href="#about" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'about')}>About</a>
+            <a href="#benefits" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'benefits')}>Benefits</a>
+            <a href="#services" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'services')}>Services</a>
+            <a href="#pricing" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'pricing')}>Pricing</a>
+            <a href="#contact" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'contact')}>Contact</a>
+            <a href="#contact" className="bg-purple-600 hover:bg-purple-700 transition text-white px-6 py-2 rounded-full font-semibold shadow-lg mt-4" onClick={e => {handleNavClick(e, 'contact')}}>Get Started</a>
+          </motion.nav>
+        )}
+
         
         <h1 className="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">Affordable Landing Pages for Small Businesses</h1>
         <p className="max-w-xl mx-auto text-lg md:text-xl mb-6 text-gray-300">Empower your business with visually stunning, SEO-optimized landing pages. Minimal backend, maximum design and discoverability.</p>
-        <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-8">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
           <div className="bg-[#181828] rounded-xl px-6 py-4 shadow-lg flex flex-col items-center">
             <span className="font-bold text-lg">$50</span>
             <span className="text-xs text-gray-400">Starting at</span>
@@ -160,8 +209,8 @@ export default function Home() {
               transition={{ duration: 0.7, delay: idx * 0.15 }}
               className={
                 card.type === 'quote'
-                  ? `relative bg-[#191922] rounded-3xl shadow-lg p-8 w-[290px] h-[220px] flex flex-col justify-between ${idx === 0 ? 'rotate-[-8deg]' : 'rotate-[-4deg]'}`
-                  : `relative bg-[#191922] rounded-3xl shadow-lg p-8 w-[220px] h-[220px] flex items-center justify-center ${idx === 1 ? 'rotate-[6deg]' : 'rotate-[5deg]'}`
+                  ? `relative bg-[#191922] rounded-3xl shadow-lg p-8 w-full max-w-[290px] h-[220px] flex flex-col justify-between ${idx === 0 ? 'rotate-[-8deg]' : 'rotate-[-4deg]'}`
+                  : `relative bg-[#191922] rounded-3xl shadow-lg p-8 w-full max-w-[220px] h-[220px] flex items-center justify-center ${idx === 1 ? 'rotate-[6deg]' : 'rotate-[5deg]'}`
               }
             >
               {card.type === 'quote' ? (
@@ -193,11 +242,11 @@ export default function Home() {
       {/* About Section */}
       <motion.section
         id="about"
-        initial="hidden"
-        whileInView="show"
+        initial={isLargeScreen ? "hidden" : undefined}
+        whileInView={isLargeScreen ? "show" : undefined}
         viewport={{ once: true, amount: 0.6 }}
         variants={fadeInUp}
-        className="max-w-6xl mx-auto py-20 px-2"
+        className="max-w-6xl mx-auto py-20 px-6 md:px-8"
       >
         <div className="flex flex-col md:flex-row gap-10 items-center justify-between mt-3">
           {/* Left: Text and Features */}
@@ -241,14 +290,14 @@ export default function Home() {
       {/* Benefits Section */}
       <motion.section
         id="benefits"
-        initial="hidden"
-        whileInView="show"
+        initial={isLargeScreen ? "hidden" : undefined}
+        whileInView={isLargeScreen ? "show" : undefined}
         viewport={{ once: true, amount: 0.6 }}
         variants={fadeInUp}
         className="max-w-6xl mx-auto py-20 px-2"
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">Why Choose Us</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 grid-rows-none md:grid-rows-2 gap-6">
           {/* Scalable Resources (spans 2 rows) */}
           <div className="relative bg-[#181828] rounded-2xl shadow-lg p-8 flex flex-col row-span-2 min-h-[340px]">
             <span className="font-bold text-xl mb-2 text-white">Scalable Resources</span>
@@ -323,14 +372,14 @@ export default function Home() {
       {/* Services Section */}
       <motion.section
         id="services"
-        initial="hidden"
-        whileInView="show"
+        initial={isLargeScreen ? "hidden" : undefined}
+        whileInView={isLargeScreen ? "show" : undefined}
         viewport={{ once: true, amount: 0.6 }}
         variants={fadeInUp}
         className="max-w-5xl mx-auto py-20 px-4"
       >
         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">Our Services</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {/* Landing Page Design */}
           <div className="bg-[#181828] rounded-xl p-6 flex flex-col items-center shadow-lg">
             <span className="mb-3">
@@ -406,7 +455,7 @@ export default function Home() {
                         className={`transition-transform duration-300 ${openFaq === i ? 'rotate-45' : ''}`}
                       >
                         <circle cx="10" cy="10" r="9" fill="#fff" fillOpacity=".08" />
-                        <path d="M10 6v8M6 10h8" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
+                        <path d="M10 6v8M6 10h8" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </span>
                   </div>
@@ -506,8 +555,8 @@ export default function Home() {
       {/* Pricing Section */}
       <motion.section
         id="pricing"
-        initial="hidden"
-        whileInView="show"
+        initial={isLargeScreen ? "hidden" : undefined}
+        whileInView={isLargeScreen ? "show" : undefined}
         viewport={{ once: true, amount: 0.6 }}
         variants={fadeInUp}
         className="max-w-6xl mx-auto py-20 px-2"
@@ -516,7 +565,7 @@ export default function Home() {
         <h3 className="text-2xl font-bold mb-8 text-center text-gray-400">Choose the perfect landing page solution for your business</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 place-items-center">
           {/* Standard */}
-          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px]">
+          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px] sm:min-w-0 w-full">
             <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-4">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
             </div>
@@ -536,7 +585,7 @@ export default function Home() {
             </div>
           </div>
           {/* Premium */}
-          <div className="relative bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px] ring-2 ring-white ring-opacity-50">
+          <div className="relative bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px] sm:min-w-0 w-full ring-2 ring-white ring-opacity-50">
              <div className="absolute inset-0 rounded-3xl pointer-events-none" style={{backgroundImage: 'radial-gradient(circle at top, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)'}}>
              </div>
             <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-4">
@@ -558,7 +607,7 @@ export default function Home() {
             </div>
           </div>
           {/* Platinum */}
-          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[260px]">
+          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[260px] sm:min-w-0 w-full">
             <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-4">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
             </div>
@@ -576,7 +625,7 @@ export default function Home() {
             </div>
           </div>
           {/* Monthly Subscription */}
-          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px]">
+          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px] sm:min-w-0 w-full">
             <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-4">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6.01l.01 0"></path><path d="M10.5 9h3l-1.5 6"></path></svg>
             </div>
@@ -620,7 +669,7 @@ export default function Home() {
                   {icon: 'github', url: '#'},
                 ].map((social) => (
                   <a key={social.icon} href={social.url} className="text-gray-400 hover:text-white transition">
-                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path></svg>
+                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path></svg>
                   </a>
                 ))}
               </div>
