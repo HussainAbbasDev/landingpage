@@ -599,23 +599,54 @@ export default function Home() {
       </motion.section>
 
             {/* Footer */}
-      <footer className="w-full py-10 bg-[#0a0a0a] border-t border-[#23233a] text-center text-gray-400">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 px-4">
-          <div className="flex flex-col items-center md:items-start">
-            <div className="flex items-center gap-2 mb-2 text-white">
-              <Image src="/logo.png" alt="GAsoft Logo" width={32} height={32} className="rounded-full" />
-              <span className="font-bold text-base tracking-wide">GAsoft</span>
+      <footer className="w-full py-16 bg-[#0a0a0a] text-[#ededed] text-center">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl md:text-6xl font-extrabold mb-12 text-white">Power Your Business</h2>
+          <div className="w-full border-t border-[#23233a] mt-8 pt-8" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
+            {/* Left Column: Logo, Tagline, Social */}
+            <div className="flex flex-col items-center md:items-start text-center md:text-left">
+              <div className="flex items-center gap-2 mb-2 text-white">
+                <Image src="/logo.png" alt="GAsoft Logo" width={32} height={32} className="rounded-full" />
+                <span className="font-bold text-base tracking-wide">GAsoft</span>
+              </div>
+              <span className="text-gray-400 text-base mb-6">Innovate Faster, Scale Smarter.</span>
+              <div className="flex gap-4">
+                {/* Social Icons */}
+                {[
+                  {icon: 'facebook', url: '#'},
+                  {icon: 'twitter', url: '#'},
+                  {icon: 'linkedin', url: '#'},
+                  {icon: 'github', url: '#'},
+                ].map((social) => (
+                  <a key={social.icon} href={social.url} className="text-gray-400 hover:text-white transition">
+                    <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path></svg>
+                  </a>
+                ))}
+              </div>
             </div>
-            <span className="text-xs">Innovate Faster, Scale Smarter.</span>
+
+            {/* Middle Column: Pages */}
+            <div className="flex flex-col gap-2">
+              <span className="font-bold text-base mb-2">Pages</span>
+              <a href="#about" className="text-gray-400 hover:text-white transition">About</a>
+              <a href="#services" className="text-gray-400 hover:text-white transition">Services</a>
+              <a href="#pricing" className="text-gray-400 hover:text-white transition">Pricing</a>
+              <a href="#contact" className="text-gray-400 hover:text-white transition">Contact</a>
+            </div>
+
+            {/* Right Column: Contact Us */}
+            <div className="flex flex-col gap-2">
+              <span className="font-bold text-base mb-2">Contact Us</span>
+              <a href="mailto:info@gsoft.com" className="text-gray-400 hover:text-white transition">info@gsoft.com</a>
+              <a href="tel:+1234567890" className="text-gray-400 hover:text-white transition">+1 (234) 567-890</a>
+              <a href="#" className="text-gray-400 hover:text-white transition">123 Main St, City, Country</a>
+            </div>
           </div>
-          <div className="flex gap-8 text-sm">
-            <a href="#about" className="hover:text-purple-400 transition">About</a>
-            <a href="#services" className="hover:text-purple-400 transition">Services</a>
-            <a href="#pricing" className="hover:text-purple-400 transition">Pricing</a>
-            <a href="#contact" className="hover:text-purple-400 transition">Contact</a>
-          </div>
-          <div className="text-xs">&copy; {new Date().getFullYear()} GAsoft. All rights reserved.</div>
         </div>
+        
+        {/* Copyright */}
+        <div className="mt-12 text-gray-400 text-sm">&copy; {new Date().getFullYear()} GAsoft. All rights reserved.</div>
       </footer>
     </div>
   );
