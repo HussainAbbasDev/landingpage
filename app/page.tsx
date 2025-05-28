@@ -514,16 +514,16 @@ export default function Home() {
       >
         <h2 className="text-4xl font-extrabold mb-2 text-center text-white">Our Packages</h2>
         <h3 className="text-2xl font-bold mb-8 text-center text-gray-400">Choose the perfect landing page solution for your business</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Basic */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 place-items-center">
+          {/* Standard */}
           <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px]">
             <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-4">
-              <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#fff" fillOpacity=".15"/><path d="M12 8l2 4h-4l2-4z" fill="#fff"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
             </div>
-            <div className="text-xl font-bold text-white mb-1">Basic</div>
+            <div className="text-xl font-bold text-white mb-1">Standard</div>
             <div className="text-gray-400 mb-4">Best for simple campaigns</div>
-            <div className="text-3xl font-extrabold mb-2 text-white">$50</div>
-            <button className="w-full bg-[#23233a] text-white font-semibold py-2 rounded-lg shadow-md hover:bg-[#2d2d44] transition mb-4" onClick={() => window.location.href = '#contact'}>Get Started</button>
+            <div className="text-3xl font-extrabold mb-2 text-white">$299</div>
+            <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="w-full bg-[#23233a] text-white font-semibold py-2 rounded-lg shadow-md hover:bg-[#2d2d44] transition mb-4">Get Started</button>
             <div className="w-full border-b border-[#23233a] mb-4"></div>
             <div className="w-full text-left">
               <div className="font-semibold mb-2">What you will get</div>
@@ -535,15 +535,17 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          {/* Standard */}
-          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px]">
+          {/* Premium */}
+          <div className="relative bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px] ring-2 ring-white ring-opacity-50">
+             <div className="absolute inset-0 rounded-3xl pointer-events-none" style={{backgroundImage: 'radial-gradient(circle at top, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)'}}>
+             </div>
             <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-4">
-              <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#fff" fillOpacity=".15"/><path d="M12 8l2 4h-4l2-4z" fill="#fff"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
             </div>
-            <div className="text-xl font-bold text-white mb-1">Standard</div>
+            <div className="text-xl font-bold text-white mb-1">Premium</div>
             <div className="text-gray-400 mb-4">For growing businesses</div>
-            <div className="text-3xl font-extrabold mb-2 text-white">$250</div>
-            <button onClick={() => window.location.href = '#contact'} className="w-full bg-white text-[#23233a] font-semibold py-2 rounded-lg shadow-md hover:bg-gray-200 transition mb-4">Get Started</button>
+            <div className="text-3xl font-extrabold mb-2 text-white">$499</div>
+            <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="w-full bg-white text-[#23233a] font-semibold py-2 rounded-lg shadow-md hover:bg-gray-200 transition mb-4">Get Started</button>
             <div className="w-full border-b border-[#23233a] mb-4"></div>
             <div className="w-full text-left">
               <div className="font-semibold mb-2">What you will get</div>
@@ -555,23 +557,41 @@ export default function Home() {
               </ul>
             </div>
           </div>
-          {/* Premium */}
-          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px]">
+          {/* Platinum */}
+          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[260px]">
             <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-4">
-              <svg width="22" height="22" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#fff" fillOpacity=".15"/><path d="M12 8l2 4h-4l2-4z" fill="#fff"/></svg>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
             </div>
-            <div className="text-xl font-bold text-white mb-1">Premium</div>
-            <div className="text-gray-400 mb-4">For launches & campaigns</div>
-            <div className="text-3xl font-extrabold mb-2 text-white">$300</div>
-            <button onClick={() => window.location.href = '#contact'} className="w-full bg-[#23233a] text-white font-semibold py-2 rounded-lg shadow-md hover:bg-[#2d2d44] transition mb-4">Get Started</button>
+            <div className="text-xl font-bold text-white mb-1">Platinum</div>
+            <div className="text-gray-400 mb-4">For comprehensive solutions</div>
+            <div className="text-3xl font-extrabold mb-2 text-white">$799</div>
+            <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="w-full bg-[#23233a] text-white font-semibold py-2 rounded-lg shadow-md hover:bg-[#2d2d44] transition mb-4">Get Started</button>
             <div className="w-full border-b border-[#23233a] mb-4"></div>
             <div className="w-full text-left">
               <div className="font-semibold mb-2">What you will get</div>
               <ul className="text-gray-300 text-base space-y-1">
-                <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> 2 Pages & Advanced Design</li>
-                <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> Advanced SEO & Analytics</li>
-                <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> 2-3 Weeks Delivery</li>
-                <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> Dedicated Support</li>
+                <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> 3+ Pages </li>
+                <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> SEO Included</li>
+                <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> Advanced Analytics</li></ul>
+            </div>
+          </div>
+          {/* Monthly Subscription */}
+          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px]">
+            <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6.01l.01 0"></path><path d="M10.5 9h3l-1.5 6"></path></svg>
+            </div>
+            <div className="text-xl font-bold text-white mb-1">Monthly Subscription</div>
+            <div className="text-gray-400 mb-4">Ongoing support and updates</div>
+            <div className="text-3xl font-extrabold mb-2 text-white">$50 <span className="text-xl font-semibold text-gray-400">/ Month</span></div>
+            <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="w-full bg-[#23233a] text-white font-semibold py-2 rounded-lg shadow-md hover:bg-[#2d2d44] transition mb-4">Subscribe Now</button>
+            <div className="w-full border-b border-[#23233a] mb-4"></div>
+            <div className="w-full text-left">
+              <div className="font-semibold mb-2">What you will get</div>
+              <ul className="text-gray-300 text-base space-y-1">
+                <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> Monthly Content Updates</li>
+                <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> Performance Monitoring</li>
+                <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> Basic Security Checks</li>
+                <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> Email Support</li>
               </ul>
             </div>
           </div>
