@@ -122,63 +122,54 @@ export default function Home() {
 
   return (
     <div className="bg-[#0a0a0a] text-[#ededed] font-sans min-h-screen w-full overflow-x-hidden">
+      {/* Header */}
+      <header className="w-full flex justify-between items-center mx-auto pt-3 mt-0 bg-white/30 backdrop-blur-md px-6 py-3 sticky top-0 z-50">
+        <div className="flex items-center gap-2">
+          {/* Placeholder Logo */}
+          <Image src="/logo.png" alt="GAsoft Logo" width={40} height={40} className="rounded-full" />
+          <span className="font-bold text-lg tracking-wide">GAsoft</span>
+        </div>
+        <nav className="hidden md:flex gap-8 text-sm font-medium">
+          <a href="#about" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'about')}>About</a>
+          <a href="#benefits" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'benefits')}>Benefits</a>
+          <a href="#services" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'services')}>Services</a>
+          <a href="#pricing" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'pricing')}>Pricing</a>
+          <a href="#contact" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'contact')}>Contact</a>
+        </nav>
+        <a href="#contact" className="hidden md:flex bg-purple-600 hover:bg-purple-700 transition text-white px-6 py-2 rounded-full font-semibold shadow-lg" onClick={e => handleNavClick(e, 'contact')}>Get Started</a>
+      </header>
+
+      {/* Mobile Menu Button */}
+      <button 
+        className="md:hidden fixed top-4 right-6 z-50 p-2 rounded-md bg-white/30 backdrop-blur-md" 
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
+        aria-label="Toggle Mobile Menu"
+      >
+        {/* ... existing code ... */}
+      </button>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <motion.nav
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 bg-[#0a0a0a] z-50 flex flex-col items-center justify-center gap-6 text-xl font-medium md:hidden"
+        >
+          {/* ... existing code ... */}
+        </motion.nav>
+      )}
+
       {/* Hero Section */}
       <motion.section
         id="hero"
         className="relative flex flex-col items-center justify-center min-h-[60vh] px-4 text-center bg-gradient-to-b from-[#1a1a2e] to-[#0a0a0a]"
-        initial={isLargeScreen ? "hidden" : undefined}
-        whileInView={isLargeScreen ? "show" : undefined}
-        viewport={{ once: true, amount: 0.99}}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
         variants={fadeInUp}
       >
-        
-                <header className="w-full flex justify-between items-center max-w-6xl mx-auto mb-20 pt-3 mt-0 bg-white/30 rounded-xl backdrop-blur-md px-6 py-3">
-          
-          <div className="flex items-center gap-2">
-            {/* Placeholder Logo */}
-            <Image src="/logo.png" alt="GAsoft Logo" width={40} height={40} className="rounded-full" />
-            <span className="font-bold text-lg tracking-wide">GAsoft</span>
-          </div>
-          <nav className="hidden md:flex gap-8 text-sm font-medium">
-            <a href="#about" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'about')}>About</a>
-            <a href="#benefits" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'benefits')}>Benefits</a>
-            <a href="#services" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'services')}>Services</a>
-            <a href="#pricing" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'pricing')}>Pricing</a>
-            <a href="#contact" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'contact')}>Contact</a>
-          </nav>
-          <a href="#contact" className="hidden md:flex bg-purple-600 hover:bg-purple-700 transition text-white px-6 py-2 rounded-full font-semibold shadow-lg" onClick={e => handleNavClick(e, 'contact')}>Get Started</a>
-        </header>
-        
-        {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden fixed top-4 right-6 z-50 p-2 rounded-md bg-white/30 backdrop-blur-md" 
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
-          aria-label="Toggle Mobile Menu"
-        >
-          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={isMobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}></path>
-          </svg>
-        </button>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <motion.nav
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-[#0a0a0a] z-50 flex flex-col items-center justify-center gap-6 text-xl font-medium md:hidden"
-          >
-            <a href="#about" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'about')}>About</a>
-            <a href="#benefits" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'benefits')}>Benefits</a>
-            <a href="#services" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'services')}>Services</a>
-            <a href="#pricing" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'pricing')}>Pricing</a>
-            <a href="#contact" className="hover:text-purple-400 transition" onClick={e => handleNavClick(e, 'contact')}>Contact</a>
-            <a href="#contact" className="bg-purple-600 hover:bg-purple-700 transition text-white px-6 py-2 rounded-full font-semibold shadow-lg mt-4" onClick={e => {handleNavClick(e, 'contact')}}>Get Started</a>
-          </motion.nav>
-        )}
-
-        
         <h1 className="text-4xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">Affordable Landing Pages for Small Businesses</h1>
         <p className="max-w-xl mx-auto text-lg md:text-xl mb-6 text-gray-300">Empower your business with visually stunning, SEO-optimized landing pages. Minimal backend, maximum design and discoverability.</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
@@ -198,8 +189,8 @@ export default function Home() {
       </motion.section>
 
       {/* Testimonial Section */}
-      <section className="w-full flex justify-center items-center py-2 md:py-4 bg-transparent -mt-4 mb-4 z-10 relative">
-        <div className="flex flex-wrap justify-center gap-8 md:gap-10 max-w-6xl">
+      <section className="w-full flex justify-center items-center py-2 bg-transparent z-10 relative">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-items-center gap-x-2 gap-y-4 md:gap-x-4 max-w-7xl mx-auto items-start">
           {testimonialCards.map((card, idx) => (
             <motion.div
               key={idx}
@@ -209,8 +200,8 @@ export default function Home() {
               transition={{ duration: 0.7, delay: idx * 0.15 }}
               className={
                 card.type === 'quote'
-                  ? `relative bg-[#191922] rounded-3xl shadow-lg p-8 w-full max-w-[290px] h-[220px] flex flex-col justify-between ${idx === 0 ? 'rotate-[-8deg]' : 'rotate-[-4deg]'}`
-                  : `relative bg-[#191922] rounded-3xl shadow-lg p-8 w-full max-w-[220px] h-[220px] flex items-center justify-center ${idx === 1 ? 'rotate-[6deg]' : 'rotate-[5deg]'}`
+                  ? `relative bg-[#191922] rounded-3xl shadow-lg p-8 flex-shrink-0 w-[290px] h-[220px] flex flex-col justify-between ${idx === 0 ? 'rotate-[-8deg]' : 'rotate-[-4deg]'}`
+                  : `relative bg-[#191922] rounded-3xl shadow-lg p-8 flex-shrink-0 w-[220px] h-[220px] flex items-center justify-center ${idx === 1 ? 'rotate-[6deg]' : 'rotate-[5deg]'}`
               }
             >
               {card.type === 'quote' ? (
@@ -242,11 +233,11 @@ export default function Home() {
       {/* About Section */}
       <motion.section
         id="about"
-        initial={isLargeScreen ? "hidden" : undefined}
-        whileInView={isLargeScreen ? "show" : undefined}
-        viewport={{ once: true, amount: 0.6 }}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
         variants={fadeInUp}
-        className="max-w-6xl mx-auto py-20 px-6 md:px-8"
+        className="max-w-6xl mx-auto py-3 px-3 md:px-8"
       >
         <div className="flex flex-col md:flex-row gap-10 items-center justify-between mt-3">
           {/* Left: Text and Features */}
@@ -290,9 +281,9 @@ export default function Home() {
       {/* Benefits Section */}
       <motion.section
         id="benefits"
-        initial={isLargeScreen ? "hidden" : undefined}
-        whileInView={isLargeScreen ? "show" : undefined}
-        viewport={{ once: true, amount: 0.6 }}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
         variants={fadeInUp}
         className="max-w-6xl mx-auto py-20 px-2"
       >
@@ -372,9 +363,9 @@ export default function Home() {
       {/* Services Section */}
       <motion.section
         id="services"
-        initial={isLargeScreen ? "hidden" : undefined}
-        whileInView={isLargeScreen ? "show" : undefined}
-        viewport={{ once: true, amount: 0.6 }}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
         variants={fadeInUp}
         className="max-w-5xl mx-auto py-20 px-4"
       >
@@ -555,9 +546,9 @@ export default function Home() {
       {/* Pricing Section */}
       <motion.section
         id="pricing"
-        initial={isLargeScreen ? "hidden" : undefined}
-        whileInView={isLargeScreen ? "show" : undefined}
-        viewport={{ once: true, amount: 0.6 }}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
         variants={fadeInUp}
         className="max-w-6xl mx-auto py-20 px-2"
       >
@@ -565,7 +556,7 @@ export default function Home() {
         <h3 className="text-2xl font-bold mb-8 text-center text-gray-400">Choose the perfect landing page solution for your business</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 place-items-center">
           {/* Standard */}
-          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px] sm:min-w-0 w-full">
+          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px] sm:min-w-0 w-full min-h-[580px]">
             <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-4">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
             </div>
@@ -574,9 +565,9 @@ export default function Home() {
             <div className="text-3xl font-extrabold mb-2 text-white">$299</div>
             <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="w-full bg-[#23233a] text-white font-semibold py-2 rounded-lg shadow-md hover:bg-[#2d2d44] transition mb-4">Get Started</button>
             <div className="w-full border-b border-[#23233a] mb-4"></div>
-            <div className="w-full text-left">
+            <div className="w-full text-left flex flex-col flex-grow">
               <div className="font-semibold mb-2">What you will get</div>
-              <ul className="text-gray-300 text-base space-y-1">
+              <ul className="text-gray-300 text-base space-y-1 flex-grow">
                 <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> 1 Landing Page</li>
                 <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> Basic SEO Setup</li>
                 <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> 4-5 Days Delivery</li>
@@ -585,7 +576,7 @@ export default function Home() {
             </div>
           </div>
           {/* Premium */}
-          <div className="relative bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px] sm:min-w-0 w-full ring-2 ring-white ring-opacity-50">
+          <div className="relative bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px] sm:min-w-0 w-full ring-2 ring-white ring-opacity-50 min-h-[580px]">
              <div className="absolute inset-0 rounded-3xl pointer-events-none" style={{backgroundImage: 'radial-gradient(circle at top, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)'}}>
              </div>
             <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-4">
@@ -596,9 +587,9 @@ export default function Home() {
             <div className="text-3xl font-extrabold mb-2 text-white">$499</div>
             <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="w-full bg-white text-[#23233a] font-semibold py-2 rounded-lg shadow-md hover:bg-gray-200 transition mb-4">Get Started</button>
             <div className="w-full border-b border-[#23233a] mb-4"></div>
-            <div className="w-full text-left">
+            <div className="w-full text-left flex flex-col flex-grow">
               <div className="font-semibold mb-2">What you will get</div>
-              <ul className="text-gray-300 text-base space-y-1">
+              <ul className="text-gray-300 text-base space-y-1 flex-grow">
                 <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> Custom Graphics</li>
                 <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> Contact Form & Analytics</li>
                 <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> 1-2 Weeks Delivery</li>
@@ -607,7 +598,7 @@ export default function Home() {
             </div>
           </div>
           {/* Platinum */}
-          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[260px] sm:min-w-0 w-full">
+          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[260px] sm:min-w-0 w-full min-h-[580px]">
             <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-4">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
             </div>
@@ -616,16 +607,16 @@ export default function Home() {
             <div className="text-3xl font-extrabold mb-2 text-white">$799</div>
             <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="w-full bg-[#23233a] text-white font-semibold py-2 rounded-lg shadow-md hover:bg-[#2d2d44] transition mb-4">Get Started</button>
             <div className="w-full border-b border-[#23233a] mb-4"></div>
-            <div className="w-full text-left">
+            <div className="w-full text-left flex flex-col flex-grow">
               <div className="font-semibold mb-2">What you will get</div>
-              <ul className="text-gray-300 text-base space-y-1">
+              <ul className="text-gray-300 text-base space-y-1 flex-grow">
                 <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> 3+ Pages </li>
                 <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> SEO Included</li>
                 <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> Advanced Analytics</li></ul>
             </div>
           </div>
           {/* Monthly Subscription */}
-          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px] sm:min-w-0 w-full">
+          <div className="bg-[#181828] rounded-3xl shadow-xl flex flex-col items-center p-8 min-w-[280px] sm:min-w-0 w-full min-h-[580px]">
             <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 mb-4">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6.01l.01 0"></path><path d="M10.5 9h3l-1.5 6"></path></svg>
             </div>
@@ -634,9 +625,9 @@ export default function Home() {
             <div className="text-3xl font-extrabold mb-2 text-white">$50 <span className="text-xl font-semibold text-gray-400">/ Month</span></div>
             <button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="w-full bg-[#23233a] text-white font-semibold py-2 rounded-lg shadow-md hover:bg-[#2d2d44] transition mb-4">Subscribe Now</button>
             <div className="w-full border-b border-[#23233a] mb-4"></div>
-            <div className="w-full text-left">
+            <div className="w-full text-left flex flex-col flex-grow">
               <div className="font-semibold mb-2">What you will get</div>
-              <ul className="text-gray-300 text-base space-y-1">
+              <ul className="text-gray-300 text-base space-y-1 flex-grow">
                 <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> Monthly Content Updates</li>
                 <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> Performance Monitoring</li>
                 <li className="flex items-center gap-2"><span className="text-blue-400">✓</span> Basic Security Checks</li>
